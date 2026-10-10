@@ -1,0 +1,52 @@
+@import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+@import 'leaflet/dist/leaflet.css';
+@import 'tailwindcss';
+
+/* 온잇다 디자인 토큰 — 주황·베이지 + 명확한 위험 빨강 */
+@theme {
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, 'Malgun Gothic', sans-serif;
+
+  --color-brand: #c65a1e;        /* 주 버튼 (흰 글씨 대비 4.5:1 이상) */
+  --color-brand-dark: #a24714;
+  --color-brand-soft: #fbe3cf;
+  --color-brand-wash: #fdf1e6;
+
+  --color-canvas: #faf5ee;       /* 베이지 배경 */
+  --color-surface: #ffffff;
+  --color-line: #eadfcf;
+  --color-line-strong: #d9c8b2;
+
+  --color-ink: #2b2118;
+  --color-ink-2: #5a4a3c;
+  --color-ink-3: #85725f;
+
+  --color-safe: #2e8b57;
+  --color-safe-soft: #e3f3e9;
+  --color-caution: #e0a100;
+  --color-caution-ink: #8a5a00;
+  --color-caution-soft: #fdf3d4;
+  --color-danger: #d62828;
+  --color-danger-dark: #b31f1f;
+  --color-danger-soft: #fde4e2;
+}
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+
+/* 접근성: 키보드 포커스를 분명하게 */
+:focus-visible { outline: 3px solid var(--color-brand); outline-offset: 2px; }
+
+.leaflet-container { font-family: var(--font-sans); background: #f3ece2; }
+.leaflet-tooltip { font-size: 13px; border-radius: 8px; }
+.leaflet-tooltip.region-label {
+  background: transparent; border: 0; box-shadow: none;
+  color: #a38c73; font-size: 11px; font-weight: 600;
+}
+.leaflet-tooltip.region-label::before { display: none; }

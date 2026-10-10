@@ -1,0 +1,16 @@
+{
+  "name": "onitda",
+  "private": true,
+  "version": "0.1.0",
+  "description": "온잇다 — 기후·에너지 취약 고령층 케어 플랫폼 (공모전 시연용 MVP)",
+  "scripts": {
+    "setup": "node scripts/setup.mjs && npm install --no-audit --no-fund",
+    "dev": "concurrently -k -n API,WEB -c yellow,cyan \"node scripts/backend.mjs\" \"npm --prefix frontend run dev\"",
+    "build": "npm --prefix frontend run build",
+    "demo": "npm --prefix frontend run build && node scripts/backend.mjs",
+    "test": "node scripts/py.mjs -m pytest -q"
+  },
+  "devDependencies": {
+    "concurrently": "9.1.2"
+  }
+}
