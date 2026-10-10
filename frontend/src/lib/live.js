@@ -10,17 +10,39 @@ let source = null
 
 function emit() { listeners.forEach((l) => l()) }
 
-function ensureSource() {
-  if (source) return
+// 브라우저는 같은 주소로 동시 연결을 6개까지만 허용하므로, 여러 탭·분할 화면이 SSE 연결 1개를 함께 쓴다.
+// 한 탭(Web Lock 보유자)만 SSE 를 열고, 받은 이벤트를 BroadcastChannel 로 다른 탭에 전달한다.
+const channel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('onitda-live') : null
+
+function onRefresh() { version += 1; emit() }
+function setConnected(v) { if (connected !== v) { connected = v; emit() } }
+
+function openSource() {
   source = new EventSource('/api/events')
-  source.onopen = () => { connected = true; emit() }
+  source.onopen = () => { setConnected(true); channel?.postMessage({ kind: 'status', connected: true }) }
   source.onmessage = (e) => {
     try {
       const msg = JSON.parse(e.data)
-      if (msg.type === 'refresh') { version += 1; emit() }
+      if (msg.type === 'refresh') { onRefresh(); channel?.postMessage({ kind: 'refresh' }) }
     } catch { /* keep-alive 등 */ }
   }
-  source.onerror = () => { connected = false; emit() }
+  source.onerror = () => { setConnected(false); channel?.postMessage({ kind: 'status', connected: false }) }
+  setInterval(() => channel?.postMessage({ kind: 'status', connected }), 3000)
+}
+
+function ensureSource() {
+  if (source) return
+  source = 'pending'
+  if (channel && navigator.locks) {
+    channel.onmessage = (e) => {
+      if (e.data?.kind === 'refresh') onRefresh()
+      if (e.data?.kind === 'status') setConnected(e.data.connected)
+    }
+    // 잠금을 얻은 탭이 SSE 담당. 그 탭이 닫히면 다음 탭이 이어받는다.
+    navigator.locks.request('onitda-sse', () => new Promise(() => openSource()))
+  } else {
+    openSource()
+  }
 }
 
 setInterval(() => { version += 1; emit() }, 10000)
