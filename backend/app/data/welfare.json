@@ -1,0 +1,27 @@
+{
+  "_comment": "에너지 지원 제도 안내 문구. ※ 모두 placeholder 입니다 — 공식 정보(산업통상자원부·한국에너지공단·한전·지자체 공고) 확인 후 수정하세요. 대상·금액·기간을 임의로 적지 마세요.",
+  "contact": "가까운 행정복지센터 또는 담당 복지사에게 문의하세요.",
+  "programs": [
+    {
+      "id": "energy_voucher",
+      "title": "에너지바우처",
+      "summary": "여름 냉방비·겨울 난방비를 지원하는 제도예요.",
+      "detail": "TODO: 공식 정보 확인 후 수정 — 지원 대상, 지원 금액, 신청 기간",
+      "for": ["heatwave", "coldwave", "low_usage"]
+    },
+    {
+      "id": "kepco_discount",
+      "title": "전기요금 복지 할인",
+      "summary": "어려운 가구의 전기요금을 깎아 주는 제도예요.",
+      "detail": "TODO: 공식 정보 확인 후 수정 — 할인 대상, 할인 폭, 신청 방법",
+      "for": ["heatwave", "coldwave", "low_usage"]
+    },
+    {
+      "id": "cooling_heating_device",
+      "title": "냉·난방 용품 지원",
+      "summary": "선풍기·전기요 등 냉·난방 용품을 지원받을 수 있어요.",
+      "detail": "TODO: 공식 정보 확인 후 수정 — 지자체별 사업명, 대상, 신청처",
+      "for": ["heatwave", "coldwave"]
+    }
+  ]
+}

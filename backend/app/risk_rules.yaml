@@ -1,0 +1,84 @@
+# ═══════════════════════════════════════════════════════════════
+#  온잇다 위험도 규칙 설정 (규칙 기반 — AI 모델 학습 없음)
+#  이 파일만 고치면 판정 기준·문구·알림 대기시간이 바뀝니다.
+#  저장하면 서버 재시작 없이 다음 재계산부터 반영됩니다.
+#  문장 안의 {중괄호} 는 계산값으로 자동 치환됩니다.
+# ═══════════════════════════════════════════════════════════════
+
+# 위험도 단계 (위로 갈수록 낮음)
+levels:
+  - key: safe
+    label: 안전
+    base_score: 10
+  - key: caution
+    label: 주의
+    base_score: 50
+  - key: danger
+    label: 위험
+    base_score: 80
+
+# 특보가 이어진 기간(최근 N일). 이 기간의 전력을 '특보 전 평소' 와 비교한다.
+alert_period_days: 3
+
+rules:
+  # ① 폭염인데 냉방 전력 증가가 없음
+  heatwave_no_cooling:
+    enabled: true
+    weather: heatwave
+    hours: [13, 14, 15, 16, 17, 18, 19, 20, 21]   # 냉방 시간대
+    min_increase_ratio: 1.3                         # 평소 대비 1.3배 미만이면 '냉방 미사용'
+    level: danger
+    reason: "폭염 특보 중이지만 오후 냉방 시간대 전력 사용이 평소의 {ratio_pct}% 수준으로, 냉방 사용 기록이 없습니다."
+    ok_reason: "폭염 특보 중 오후 냉방 시간대 전력 사용이 평소의 {ratio_pct}%로 늘어, 냉방을 사용하고 있습니다."
+    elder_message: "오늘 폭염 특보가 있어요. 에어컨이나 선풍기를 켜고, 물을 자주 드세요."
+
+  # ① 한파인데 난방 전력 증가가 없음
+  coldwave_no_heating:
+    enabled: true
+    weather: coldwave
+    hours: [19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6] # 난방 시간대 (저녁~새벽)
+    min_increase_ratio: 1.3
+    level: danger
+    reason: "한파 특보 중이지만 야간 난방 시간대 전력 사용이 평소의 {ratio_pct}% 수준으로, 난방 사용 기록이 없습니다."
+    ok_reason: "한파 특보 중 야간 난방 시간대 전력 사용이 평소의 {ratio_pct}%로 늘어, 난방을 사용하고 있습니다."
+    elder_message: "오늘 한파 특보가 있어요. 전기장판이나 난방기를 켜고 따뜻하게 지내세요."
+
+  # ② 생활 전력 무변화 (안부 이상 의심)
+  flat_pattern:
+    enabled: true
+    window_hours: 12          # 이 시간 이상 변화가 없으면 판정
+    max_range_kwh: 0.06       # 시간당 사용량의 (최대-최소) 가 이 값 이하이면 '변화 없음'
+    level: caution
+    reason: "최근 {flat_hours}시간 동안 생활 전력 변화가 거의 없습니다 (변동폭 {range_kwh} kWh). 안부 확인이 필요합니다."
+    elder_message: "잘 지내고 계신가요? 괜찮으시면 '괜찮아요' 버튼을 눌러 주세요."
+
+  # 가중치: 고령 + 독거면 한 단계 높임
+  age_alone_weight:
+    enabled: true
+    min_age: 80
+    require_alone: true
+    # false: 다른 위험 신호가 있을 때만 한 단계 높임 (주의→위험)
+    # true : 특보 중이면 신호가 없어도 안전→주의 로 높임 (사전 안부 확인)
+    apply_when_safe_during_alert: false
+    reason: "{age}세 독거 어르신으로 위험도를 한 단계 높였습니다."
+    reason_when_safe: "{weather_label} 특보 중인 {age}세 독거 어르신으로 사전 안부 확인 대상입니다."
+
+safe_elder_message: "오늘도 안전하게 잘 지내고 계세요."
+safe_reason: "특이 사항이 없습니다. 생활 전력 패턴이 평소와 같습니다."
+
+# ③ 에너지 복지 안내 대상
+welfare:
+  # 위험도가 '주의' 이상이면서, 아래 중 하나에 해당하면 안내 카드를 보여준다
+  min_level: caution
+  low_usage_daily_kwh: 4.5    # 최근 3일 하루 평균 사용량이 이 값 이하 (저사용 가구)
+  include_hvac_missing: true  # 냉·난방 미사용 판정 가구
+
+# 안부 알림 단계별 대기 시간 (초)
+checkin:
+  normal:          # 실제 운영 기준
+    to_voice_sec: 1800   # 1차 푸시 후 30분 미응답 → 2차 음성
+    to_red_sec: 1800     # 2차 음성 후 30분 미응답 → 적색 경보
+  demo:            # 시연 모드 (심사장용)
+    to_voice_sec: 10
+    to_red_sec: 10
+  message_template: "{name} 어르신, {elder_message} 괜찮으시면 화면의 '괜찮아요' 버튼을 눌러 주세요."

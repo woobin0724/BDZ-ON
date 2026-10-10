@@ -1,0 +1,66 @@
+{
+  "_comment": "계절·날씨별 추천 식단. 기상 특보가 있으면 heatwave / coldwave 가 계절보다 우선한다. 영양 정보는 일반적인 안내 수준이며 의료 조언이 아니다.",
+  "expensive_ratio": 1.2,
+  "menus": {
+    "spring": {
+      "label": "봄 제철 식단",
+      "menu": "냉이 된장국과 달래무침",
+      "tip": "봄나물은 끓는 물에 살짝 데쳐 부드럽게 드세요.",
+      "ingredients": [
+        {"name": "냉이", "benefit": "입맛을 돋우는 봄나물", "alt": null},
+        {"name": "달래", "benefit": "향긋한 제철 나물", "alt": null},
+        {"name": "딸기", "benefit": "비타민C가 많은 봄 과일", "alt": {"name": "방울토마토", "reason": "비타민이 풍부하고 값이 안정적이에요"}}
+      ]
+    },
+    "summer": {
+      "label": "여름 제철 식단",
+      "menu": "오이냉국과 닭가슴살 채소무침",
+      "tip": "더운 날엔 국물 요리로 수분을 함께 보충하세요.",
+      "ingredients": [
+        {"name": "오이", "benefit": "수분이 많아 더위에 좋아요", "alt": null},
+        {"name": "애호박", "benefit": "소화가 잘 되는 여름 채소", "alt": null},
+        {"name": "수박", "benefit": "수분 보충에 좋은 여름 과일", "alt": {"name": "참외", "reason": "수분이 많고 값이 더 저렴해요"}}
+      ]
+    },
+    "autumn": {
+      "label": "가을 제철 식단",
+      "menu": "표고버섯 들깨탕과 군고구마",
+      "tip": "고구마는 껍질째 드시면 식이섬유를 더 챙길 수 있어요.",
+      "ingredients": [
+        {"name": "고구마", "benefit": "식이섬유가 많아 변비 예방에 좋아요", "alt": null},
+        {"name": "표고버섯", "benefit": "감칠맛이 좋은 가을 버섯", "alt": null},
+        {"name": "사과", "benefit": "아삭한 가을 제철 과일", "alt": {"name": "단감", "reason": "지금이 제철이라 값이 싸고 비타민C가 많아요"}}
+      ]
+    },
+    "winter": {
+      "label": "겨울 제철 식단",
+      "menu": "굴 무국과 배추전",
+      "tip": "따뜻한 국물로 몸을 데워 주세요.",
+      "ingredients": [
+        {"name": "무", "benefit": "소화를 돕는 겨울 무", "alt": null},
+        {"name": "굴", "benefit": "단백질과 아연이 풍부해요", "alt": null},
+        {"name": "배추", "benefit": "국·전·김치 어디에나 좋은 겨울 채소", "alt": {"name": "양배추", "reason": "값이 안정적이고 위에 부담이 적어요"}}
+      ]
+    },
+    "heatwave": {
+      "label": "폭염 보양 식단",
+      "menu": "삼계탕과 오이냉국",
+      "tip": "땀을 많이 흘리니 물을 조금씩 자주 드세요. 찬 음식만 드시지는 마세요.",
+      "ingredients": [
+        {"name": "닭", "benefit": "단백질로 기운을 북돋아요", "alt": null},
+        {"name": "오이", "benefit": "수분이 많아 더위에 좋아요", "alt": null},
+        {"name": "수박", "benefit": "수분 보충에 좋은 여름 과일", "alt": {"name": "참외", "reason": "수분이 많고 값이 더 저렴해요"}}
+      ]
+    },
+    "coldwave": {
+      "label": "한파 보양 식단",
+      "menu": "소고기 무국과 생강 대추차",
+      "tip": "따뜻한 국과 차로 몸을 데우고, 식사를 거르지 마세요.",
+      "ingredients": [
+        {"name": "무", "benefit": "소화를 돕는 겨울 무", "alt": null},
+        {"name": "대추", "benefit": "따뜻한 차로 드시기 좋아요", "alt": null},
+        {"name": "배추", "benefit": "국·전·김치 어디에나 좋은 겨울 채소", "alt": {"name": "양배추", "reason": "값이 안정적이고 위에 부담이 적어요"}}
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "_comment": "mock 소매 가격(원). price=오늘, normal=평년(최근 평균). KAMIS 키가 있으면 kamis_name 으로 실제 가격을 찾아 덮어쓴다. 시연용 임의 값.",
+  "items": {
+    "냉이":     {"unit": "100g",   "price": 1450,  "normal": 1400,  "kamis_name": "냉이"},
+    "달래":     {"unit": "100g",   "price": 1200,  "normal": 1180,  "kamis_name": "달래"},
+    "딸기":     {"unit": "100g",   "price": 2390,  "normal": 1750,  "kamis_name": "딸기"},
+    "방울토마토": {"unit": "1kg",    "price": 7800,  "normal": 7900,  "kamis_name": "방울토마토"},
+    "오이":     {"unit": "10개",   "price": 8900,  "normal": 8600,  "kamis_name": "오이"},
+    "애호박":   {"unit": "1개",    "price": 1350,  "normal": 1300,  "kamis_name": "호박"},
+    "수박":     {"unit": "1개",    "price": 29800, "normal": 21500, "kamis_name": "수박"},
+    "참외":     {"unit": "10개",   "price": 16500, "normal": 17000, "kamis_name": "참외"},
+    "고구마":   {"unit": "1kg",    "price": 5200,  "normal": 4900,  "kamis_name": "고구마"},
+    "표고버섯": {"unit": "100g",   "price": 2350,  "normal": 2300,  "kamis_name": "표고버섯"},
+    "사과":     {"unit": "10개",   "price": 31800, "normal": 24500, "kamis_name": "사과"},
+    "단감":     {"unit": "10개",   "price": 13900, "normal": 14500, "kamis_name": "단감"},
+    "무":       {"unit": "1개",    "price": 2150,  "normal": 2100,  "kamis_name": "무"},
+    "굴":       {"unit": "1kg",    "price": 21500, "normal": 21000, "kamis_name": "굴"},
+    "배추":     {"unit": "1포기",  "price": 6400,  "normal": 4200,  "kamis_name": "배추"},
+    "양배추":   {"unit": "1포기",  "price": 4100,  "normal": 4300,  "kamis_name": "양배추"},
+    "닭":       {"unit": "1kg",    "price": 6100,  "normal": 5950,  "kamis_name": "닭"},
+    "대추":     {"unit": "100g",   "price": 1900,  "normal": 1850,  "kamis_name": "대추"}
+  }
+}
