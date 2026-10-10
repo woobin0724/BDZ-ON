@@ -39,3 +39,12 @@ export function duration(sec) {
   const m = Math.floor(sec / 60)
   return m < 60 ? `${m}분 ${sec % 60}초` : `${Math.floor(m / 60)}시간 ${m % 60}분`
 }
+
+/** 받침 여부에 따라 조사를 붙인다. josa('수박', '이/가') → '수박이', josa('참외', '을/를') → '참외를' */
+export function josa(word, pair) {
+  if (!word) return word
+  const [withB, withoutB] = pair.split('/')
+  const code = word.charCodeAt(word.length - 1) - 0xac00
+  const batchim = code >= 0 && code <= 11171 && code % 28 !== 0
+  return word + (batchim ? withB : withoutB)
+}
