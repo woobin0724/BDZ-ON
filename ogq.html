@@ -247,6 +247,9 @@
       color: var(--todo-text); text-align: center; padding: 16px;
     }
     .shot b { font-size: 18px; }
+    .shot-img { margin-top: 32px; }
+    .shot-img img { width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--line); background: #fff; }
+    .shot-img figcaption { margin-top: 12px; font-size: 14px; color: var(--sub); text-align: center; }
     .shot span { font-size: 14px; }
     .steps { margin-top: 40px; list-style: none; }
     .card .steps > li { margin: 0; padding-left: 0; }
@@ -727,10 +730,10 @@
             </div>
           </div>
 
-          <div class="shot">
-            <b>앱 화면 캡처 [입력 필요]</b>
-            <span>Streamlit 4탭 화면 또는 매칭 점수 대시보드 캡처를 넣어 주세요.</span>
-          </div>
+          <figure class="shot-img">
+            <img src="assets/ajpf-app.jpg" alt="AI Job Pass Finder 첫 화면: 사용법 안내와 STEP 1~4 구성" loading="lazy" width="1220" height="910">
+            <figcaption>실제 앱 첫 화면 · 스펙 진단부터 자소서까지 4단계로 안내합니다</figcaption>
+          </figure>
 
           <ol class="steps">
             <li>
